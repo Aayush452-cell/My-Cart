@@ -11,3 +11,10 @@ Features of My E-learning Platform code:-
 
 Dynamic Slider/ Add To Cart / Remove From Cart / Category Wise Product Sale / Payment Gateway Integration Custom Admin Panel/ Search bar 
 / Tracker For Tracking Products / Checkout Page / Product View Page / Blog And Blog Page With Facebook Comment and Like integration
+
+Before running the project, run these commands,
+
+1. pip install -r requirements.txt
+2. python manage.py makemigrations
+3. python manage.py migrate
+4. python manage.py runserver
