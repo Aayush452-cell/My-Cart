@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%pz25uc!4lt1-k0a9%f8#vchnt&=_yj%f-kh_)2q7hmjyjft-3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kartme.herokuapp.com']
 
 
 # Application definition
