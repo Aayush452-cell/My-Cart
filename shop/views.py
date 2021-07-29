@@ -66,7 +66,7 @@ def productView(request, myid):
 
     # Fetch the product using the id
     product = Product.objects.filter(id=myid)
-    return render(request, 'shop/prodView.html', {'product':product[0]})
+    return render(request, 'shop/productView.html', {'product':product[0]})
 
 
 def checkout(request):
@@ -88,3 +88,29 @@ def checkout(request):
         id = order.order_id
         return render(request, 'shop/checkout.html', {'thank':thank, 'id': id})
     return render(request, 'shop/checkout.html')
+
+
+def searchMatch(query, item):
+    '''return true only if query matches the item'''
+    if query in item.desc.lower() or query in item.product_name.lower() or query in item.category.lower():
+        return True
+    else:
+        return False
+
+def search(request):
+    query = request.GET.get('search')
+    allProds = []
+    catprods = Product.objects.values('category', 'id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prodtemp = Product.objects.filter(category=cat)
+        prod = [item for item in prodtemp if searchMatch(query, item)]
+
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        if len(prod) != 0:
+            allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'allProds': allProds, "msg": ""}
+    if len(allProds) == 0 or len(query)<4:
+        params = {'msg': "Please make sure to enter relevant search query"}
+    return render(request, 'shop/search.html', params)

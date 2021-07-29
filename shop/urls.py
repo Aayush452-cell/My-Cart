@@ -8,4 +8,5 @@ urlpatterns = [
     path("tracker/", views.tracker, name="TrackingStatus"),
     path("checkout/", views.checkout, name="CheckOut"),
     path("products/<int:myid>", views.productView, name="view"),
+    path('search/',views.search,name='search')
 ]
